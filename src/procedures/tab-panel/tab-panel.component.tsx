@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Search, Table, TableHeader, TableRow } from '@carbon/react';
+import { Button, Search, Table, TableBody, TableHead, TableHeader, TableRow } from '@carbon/react';
 import { Renew } from '@carbon/react/icons';
 
 import styles from './tab-panel.module.scss';
@@ -51,11 +51,14 @@ const TabPanelComponent: React.FC<TabPanelProps> = ({ title }) => {
           />
         </div>
         <Table>
-          <TableRow>
-            {headers.map((header) => (
-              <TableHeader>{header.header}</TableHeader>
-            ))}
-          </TableRow>
+          <TableHead>
+            <TableRow>
+              {headers.map((header) => (
+                <TableHeader>{header.header}</TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody></TableBody>
         </Table>
       </div>
     </>
