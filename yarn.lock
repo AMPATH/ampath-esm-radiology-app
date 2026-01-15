@@ -12,6 +12,69 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ampath/esm-procedures-app@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@ampath/esm-procedures-app@workspace:."
+  dependencies:
+    "@carbon/pictograms-react": "npm:^11.93.0"
+    "@carbon/react": "npm:^1.83.0"
+    "@openmrs/esm-framework": "npm:8.0.1-pre.3685"
+    "@openmrs/esm-styleguide": "npm:next"
+    "@playwright/test": "npm:^1.52.0"
+    "@swc/cli": "npm:^0.3.12"
+    "@swc/core": "npm:^1.3.68"
+    "@swc/jest": "npm:^0.2.36"
+    "@testing-library/dom": "npm:^10.1.0"
+    "@testing-library/jest-dom": "npm:^6.4.5"
+    "@testing-library/react": "npm:^15.0.6"
+    "@testing-library/user-event": "npm:^14.5.2"
+    "@types/jest": "npm:^29.5.12"
+    "@types/react": "npm:^18.3.21"
+    "@types/react-dom": "npm:^18.3.0"
+    "@types/react-router": "npm:^5.1.20"
+    "@types/react-router-dom": "npm:^5.3.3"
+    "@types/webpack-env": "npm:^1.18.1"
+    "@typescript-eslint/eslint-plugin": "npm:^7.8.0"
+    "@typescript-eslint/parser": "npm:^7.8.0"
+    css-loader: "npm:^6.8.1"
+    dayjs: "npm:^1.11.13"
+    dotenv: "npm:^16.0.3"
+    eslint: "npm:^8.50.0"
+    eslint-config-prettier: "npm:^8.8.0"
+    eslint-plugin-jest-dom: "npm:^5.4.0"
+    eslint-plugin-prettier: "npm:^5.1.3"
+    eslint-plugin-react-hooks: "npm:^4.6.2"
+    husky: "npm:^8.0.3"
+    i18next: "npm:^25.0.0"
+    i18next-parser: "npm:^9.3.0"
+    identity-obj-proxy: "npm:^3.0.0"
+    jest: "npm:^29.7.0"
+    jest-cli: "npm:^29.7.0"
+    jest-environment-jsdom: "npm:^29.7.0"
+    lint-staged: "npm:^15.2.2"
+    lodash-es: "npm:^4.17.21"
+    openmrs: "npm:8.0.1-pre.3685"
+    prettier: "npm:^3.3.3"
+    react: "npm:^18.3.1"
+    react-dom: "npm:^18.3.1"
+    react-i18next: "npm:^16.0.0"
+    react-router-dom: "npm:^6.14.1"
+    rxjs: "npm:^6.6.7"
+    swc-loader: "npm:^0.2.3"
+    turbo: "npm:^2.5.2"
+    typescript: "npm:^5.0.0"
+    webpack: "npm:^5.99.9"
+    webpack-cli: "npm:^6.0.1"
+  peerDependencies:
+    "@openmrs/esm-framework": "*"
+    dayjs: 1.x
+    react: 18.x
+    react-i18next: 16.x
+    react-router-dom: 6.x
+    rxjs: 6.x
+  languageName: unknown
+  linkType: soft
+
 "@ampproject/remapping@npm:^2.2.0":
   version: 2.3.0
   resolution: "@ampproject/remapping@npm:2.3.0"
@@ -1367,6 +1430,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/icon-helpers@npm:^10.70.0":
+  version: 10.70.0
+  resolution: "@carbon/icon-helpers@npm:10.70.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 10/da424bb426ecf82c63bcec7a4ba5e9debc8e37574349250179240bcfcf9f4c8a177517e19eee11fc1a03cd47df9dc3fe2bb67832ed0a862c7383069f74b35c9c
+  languageName: node
+  linkType: hard
+
 "@carbon/icons-react@npm:^11.68.0":
   version: 11.68.0
   resolution: "@carbon/icons-react@npm:11.68.0"
@@ -1395,6 +1467,19 @@ __metadata:
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
   checksum: 10/b20f42cff7950bc3e1e0add0ce31330574c6a4b21b6c8597156c1a31007654bdbe63439f019f07dc59a2ed60e70c7c7215c0f78cd4de06bada0777e8d2e3bff8
+  languageName: node
+  linkType: hard
+
+"@carbon/pictograms-react@npm:^11.93.0":
+  version: 11.93.0
+  resolution: "@carbon/pictograms-react@npm:11.93.0"
+  dependencies:
+    "@carbon/icon-helpers": "npm:^10.70.0"
+    "@ibm/telemetry-js": "npm:^1.5.0"
+    prop-types: "npm:^15.8.1"
+  peerDependencies:
+    react: ">=16"
+  checksum: 10/8f3748bdcbbe3227bf5050170dd01a76c30c8727da38c2554e33c882af21260f3d97f08b6b74b2963ac938a40870647fc6d5d5aa51e9b4c5c4707d48ba366988
   languageName: node
   linkType: hard
 
@@ -3385,7 +3470,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openmrs/esm-framework@npm:8.0.1-pre.3685, @openmrs/esm-framework@npm:next":
+"@openmrs/esm-framework@npm:8.0.1-pre.3685":
   version: 8.0.1-pre.3685
   resolution: "@openmrs/esm-framework@npm:8.0.1-pre.3685"
   dependencies:
@@ -3550,68 +3635,6 @@ __metadata:
   checksum: 10/f550c423e639c30f9238fd26c67ce65fdcf450310c715ba85a56958f883a4f1033b12174212f9cd4d357152310c3ae921da32d0f634f6b71ad920340d95e0e31
   languageName: node
   linkType: hard
-
-"@openmrs/esm-template-app@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@openmrs/esm-template-app@workspace:."
-  dependencies:
-    "@carbon/react": "npm:^1.83.0"
-    "@openmrs/esm-framework": "npm:next"
-    "@openmrs/esm-styleguide": "npm:next"
-    "@playwright/test": "npm:^1.52.0"
-    "@swc/cli": "npm:^0.3.12"
-    "@swc/core": "npm:^1.3.68"
-    "@swc/jest": "npm:^0.2.36"
-    "@testing-library/dom": "npm:^10.1.0"
-    "@testing-library/jest-dom": "npm:^6.4.5"
-    "@testing-library/react": "npm:^15.0.6"
-    "@testing-library/user-event": "npm:^14.5.2"
-    "@types/jest": "npm:^29.5.12"
-    "@types/react": "npm:^18.3.21"
-    "@types/react-dom": "npm:^18.3.0"
-    "@types/react-router": "npm:^5.1.20"
-    "@types/react-router-dom": "npm:^5.3.3"
-    "@types/webpack-env": "npm:^1.18.1"
-    "@typescript-eslint/eslint-plugin": "npm:^7.8.0"
-    "@typescript-eslint/parser": "npm:^7.8.0"
-    css-loader: "npm:^6.8.1"
-    dayjs: "npm:^1.11.13"
-    dotenv: "npm:^16.0.3"
-    eslint: "npm:^8.50.0"
-    eslint-config-prettier: "npm:^8.8.0"
-    eslint-plugin-jest-dom: "npm:^5.4.0"
-    eslint-plugin-prettier: "npm:^5.1.3"
-    eslint-plugin-react-hooks: "npm:^4.6.2"
-    husky: "npm:^8.0.3"
-    i18next: "npm:^25.0.0"
-    i18next-parser: "npm:^9.3.0"
-    identity-obj-proxy: "npm:^3.0.0"
-    jest: "npm:^29.7.0"
-    jest-cli: "npm:^29.7.0"
-    jest-environment-jsdom: "npm:^29.7.0"
-    lint-staged: "npm:^15.2.2"
-    lodash-es: "npm:^4.17.21"
-    openmrs: "npm:next"
-    prettier: "npm:^3.3.3"
-    react: "npm:^18.3.1"
-    react-dom: "npm:^18.3.1"
-    react-i18next: "npm:^16.0.0"
-    react-router-dom: "npm:^6.14.1"
-    rxjs: "npm:^6.6.7"
-    swc-loader: "npm:^0.2.3"
-    turbo: "npm:^2.5.2"
-    typescript: "npm:^5.0.0"
-    webpack: "npm:^5.99.9"
-    webpack-cli: "npm:^6.0.1"
-  peerDependencies:
-    "@openmrs/esm-framework": "*"
-    dayjs: 1.x
-    react: 18.x
-    react-i18next: 16.x
-    react-router-dom: 6.x
-    rxjs: 6.x
-  languageName: unknown
-  linkType: soft
 
 "@openmrs/esm-translations@npm:8.0.1-pre.3685":
   version: 8.0.1-pre.3685
@@ -15070,7 +15093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openmrs@npm:next":
+"openmrs@npm:8.0.1-pre.3685":
   version: 8.0.1-pre.3685
   resolution: "openmrs@npm:8.0.1-pre.3685"
   dependencies:
