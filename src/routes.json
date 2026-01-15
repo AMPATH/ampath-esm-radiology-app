@@ -5,11 +5,25 @@
     "webservices.rest": ">=2.2.0"
   },
   "pages": [
-    {
-      "component": "root",
-      "route": "procedures"
-    }
+
   ],
     "extensions": [
+    {
+      "name": "procedures-dashboard-link",
+      "component": "proceduresQueueDashboardLink",
+      "slot": "homepage-dashboard-slot",
+      "meta": {
+        "name": "procedures",
+        "slot": "procedures-dashboard-slot",
+        "title": "Procedures"
+      },
+      "online": true,
+      "offline": true
+    },
+    {
+      "component": "root",
+      "name": "procedures",
+      "slot": "procedures-dashboard-slot"
+    }
   ]
 }
