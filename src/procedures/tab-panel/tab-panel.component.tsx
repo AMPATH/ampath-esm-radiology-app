@@ -3,30 +3,14 @@ import { Button, Search, Table, TableBody, TableHead, TableHeader, TableRow } fr
 import { Renew } from '@carbon/react/icons';
 
 import styles from './tab-panel.module.scss';
+import OrdersDataTable from '../../orders-table/orders-data-table.component';
 
 interface TabPanelProps {
   title: string;
+  status: string;
 }
 
-const TabPanelComponent: React.FC<TabPanelProps> = ({ title }) => {
-  const headers = [
-    {
-      key: 'name',
-      header: 'Name',
-    },
-    {
-      key: 'age',
-      header: 'Age',
-    },
-    {
-      key: 'sex',
-      header: 'Sex',
-    },
-    {
-      key: 'totalOrders',
-      header: 'Total Orders',
-    },
-  ];
+const TabPanelComponent: React.FC<TabPanelProps> = ({ title, status }) => {
   return (
     <>
       <div>
@@ -40,26 +24,7 @@ const TabPanelComponent: React.FC<TabPanelProps> = ({ title }) => {
             <Renew size={20} color="blue" />
           </div>
         </div>
-        <div className={styles.search}>
-          <Search
-            closeButtonLabelText="Clear search input"
-            id="search-default-1"
-            labelText="Label text"
-            placeholder="Placeholder text"
-            size="md"
-            type="search"
-          />
-        </div>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {headers.map((header) => (
-                <TableHeader>{header.header}</TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody></TableBody>
-        </Table>
+        <OrdersDataTable status={status} />
       </div>
     </>
   );

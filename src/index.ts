@@ -25,3 +25,30 @@ export function startupApp() {
 export const root = getAsyncLifecycle(() => import('./root.component'), options);
 
 export const proceduresQueueDashboardLink = getSyncLifecycle(createDashboardLink(proceduresDashboardMeta), options);
+
+// Actions
+export const addProcedureRequestResultsAction = getAsyncLifecycle(
+  () => import('./actions/add-procedure-request-results-action.component'),
+  options,
+);
+
+export const pickupProcedureRequestAction = getAsyncLifecycle(
+  () => import('./actions/pickup-procedure-request-action.component'),
+  options,
+);
+
+export const rejectProcedureRequestAction = getAsyncLifecycle(
+  () => import('./actions/reject-procedure-request-action.component'),
+  options,
+);
+
+// Modals
+export const pickupProcedureRequestModal = getAsyncLifecycle(
+  () => import('./modals/pickup-procedure-request-modal.component'),
+  options,
+);
+
+export const rejectProcedureRequestModal = getAsyncLifecycle(
+  () => import('./modals/reject-procedure-request-modal.component'),
+  options,
+);
