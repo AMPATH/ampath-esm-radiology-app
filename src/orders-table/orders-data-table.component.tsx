@@ -158,7 +158,7 @@ const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
       .map(([key, value]) => {
         return { header: value.headerLabelDefault, key: key, id: key };
       });
-  }, [t, flattenedLabOrders, tableColumnSpec]);
+  }, []);
 
   const pageSizes = [10, 20, 30, 40, 50];
   const [currentPageSize, setPageSize] = useState(10);

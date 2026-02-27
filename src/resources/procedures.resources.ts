@@ -1,7 +1,7 @@
-import { useSession, useConfig, restBaseUrl, openmrsFetch, Order } from "@openmrs/esm-framework";
+import { useSession, useConfig, restBaseUrl, openmrsFetch, type Order } from "@openmrs/esm-framework";
 import dayjs from "dayjs";
 import useSWR, { mutate } from 'swr';
-import { Config } from "../config-schema";
+import { type Config } from "../config-schema";
 import { useCallback } from "react";
 
 export function useProcedureOrders(status: string) {
