@@ -1,9 +1,7 @@
-import { Button, Tab, TabList, TabPanel, TabPanels, Tabs } from '@carbon/react';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@carbon/react';
 import React from 'react';
 import TabPanelComponent from './tab-panel/tab-panel.component';
 import styles from './procedures.scss';
-import { Add } from '@carbon/react/icons';
-import OrdersDataTable from '../orders-table/orders-data-table.component';
 
 interface ProceduresProps {}
 
@@ -12,7 +10,6 @@ const Procedures: React.FC<ProceduresProps> = () => {
     <>
       <div className={styles.headerContainer}>
         <h3>Procedures</h3>
-        <Button renderIcon={Add}>Add Procedure</Button>
       </div>
       <Tabs>
         <TabList contained>
