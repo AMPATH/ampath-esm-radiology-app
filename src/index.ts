@@ -52,3 +52,9 @@ export const rejectProcedureRequestModal = getAsyncLifecycle(
   () => import('./modals/reject-procedure-request-modal.component'),
   options,
 );
+
+// Workspace
+export const postProcedureForm = getAsyncLifecycle(
+  () => import('./forms/post-procedures/post-procedure-form.component'),
+  options,
+);

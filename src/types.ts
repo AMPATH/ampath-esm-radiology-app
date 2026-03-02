@@ -37,3 +37,20 @@ export type DateFilterContext = {
   dateRange: [Date, Date] | null;
   setDateRange: React.Dispatch<React.SetStateAction<[Date, Date] | null>>;
 };
+
+export type CodedCondition = {
+  concept: {
+    uuid: string;
+    display: string;
+  };
+  conceptName: {
+    uuid: string;
+    display: string;
+  };
+  display: string;
+};
+
+export type CodedProvider = {
+  uuid: string;
+  display: string;
+};

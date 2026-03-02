@@ -23,7 +23,7 @@
       "name": "procedures",
       "slot": "procedures-dashboard-slot"
     },
-     {
+    {
       "name": "pickup-procedure-request-modal",
       "component": "pickupProcedureRequestModal"
     },
@@ -45,6 +45,14 @@
       "name": "add-procedure-request-results-action",
       "component": "addProcedureRequestResultsAction",
       "slot": "inprogress-procedure-tests-actions-slot"
+    }
+  ],
+  "workspaces": [
+    {
+      "name": "post-procedure-form-workspace",
+      "component": "postProcedureForm",
+      "title": "procedure results",
+      "type": "other-form"
     }
   ]
 }
