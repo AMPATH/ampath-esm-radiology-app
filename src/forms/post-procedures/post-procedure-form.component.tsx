@@ -36,6 +36,7 @@ import dayjs from "dayjs";
 import { mutate } from "swr";
 import { type CodedCondition, type CodedProvider, type Order } from "../../types";
 import { type Config, StringPath } from "../../config-schema";
+import { useInvalidateProcedureOrders } from "../../resources/procedures.resources";
 
 const validationSchema = z.object({
   startDatetime: z.date({ required_error: "Start datetime is required" }),
@@ -57,6 +58,7 @@ const PostProcedureForm: React.FC<PostProcedureFormProps> = ({
 }) => {
   const { sessionLocation } = useSession();
   const { t } = useTranslation();
+  const invalidateOrders = useInvalidateProcedureOrders();
 
   const [providerSearchTerm, setProviderSearchTerm] = useState("");
   const debouncedProviderSearchTerm = useDebounce(providerSearchTerm);
@@ -188,12 +190,8 @@ const PostProcedureForm: React.FC<PostProcedureFormProps> = ({
           isLowContrast: true,
           kind: "success",
         });
+      invalidateOrders();
       closeWorkspace('post-procedure-form-workspace');
-      mutate(
-        (key) => typeof key === "string" && key.startsWith("/ws/rest/v1/order"),
-        undefined,
-        { revalidate: true }
-      );
     } catch (error) {
       showSnackbar({
         title: t("error", "Error"),

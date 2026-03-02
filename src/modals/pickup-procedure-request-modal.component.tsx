@@ -43,12 +43,12 @@ const PickupProcedureRequestModal: React.FC<PickupProcedureRequestModal> = ({ or
 
   return (
     <div>
-      <ModalHeader closeModal={closeModal} title={t('pickProcedureRequest', 'Pick procedure request')} />
+      <ModalHeader closeModal={closeModal} title={t('procedureRequest', 'Procedure request')} />
       <ModalBody>
         <p>
           {t(
-            'pickRequestConfirmationText',
-            'Continuing will update the request status to "In Progress" and advance it to the next stage. Are you sure you want to proceed?',
+            'procedureRequestConfirmation',
+            'Selecting Continue will move the ticket to "In Progress". Do you wish to proceed?',
           )}
         </p>
       </ModalBody>

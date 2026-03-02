@@ -1,12 +1,10 @@
 import React from 'react';
 import { Button } from '@carbon/react';
 import { useTranslation } from 'react-i18next';
-import { mutate } from 'swr';
-import { AddIcon, launchWorkspace, restBaseUrl, useConfig } from '@openmrs/esm-framework';
+import { AddIcon, launchWorkspace, useConfig } from '@openmrs/esm-framework';
 import { type Order } from '@openmrs/esm-framework';
 import { type Config } from '../config-schema';
 import styles from './actions.scss';
-import { useInvalidateProcedureOrders } from '../resources/procedures.resources';
 
 interface AddProcedureRequestResultsActionProps {
   order: Order;
@@ -19,8 +17,7 @@ const AddProcedureRequestResultsAction: React.FC<AddProcedureRequestResultsActio
   const launchTestResultsWorkspace = () => {
     launchWorkspace('post-procedure-form-workspace', {
       patient: order.patient,
-      order,
-      mutate
+      order
     });
   };
 
