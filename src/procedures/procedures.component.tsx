@@ -17,26 +17,22 @@ const Procedures: React.FC<ProceduresProps> = () => {
       <Tabs>
         <TabList contained>
           <Tab>Procedures Ordered</Tab>
-          <Tab>Worklist</Tab>
-          <Tab>Referred out</Tab>
-          <Tab>Not Done</Tab>
+          <Tab>In progress</Tab>
           <Tab>Completed</Tab>
+          <Tab>Declined</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <TabPanelComponent title="Ordered Procedures" status=''/>
+            <TabPanelComponent title="Procedures ordered" status=''/>
           </TabPanel>
           <TabPanel>
-            <TabPanelComponent title="Worklist" status='IN_PROGRESS'/>
-          </TabPanel>
-          <TabPanel>
-            <TabPanelComponent title="Referred Out" status='EXCEPTION'/>
-          </TabPanel>
-          <TabPanel>
-            <TabPanelComponent title="Not Done" status='DECLINED'/>
+            <TabPanelComponent title="In progress" status='IN_PROGRESS'/>
           </TabPanel>
           <TabPanel>
             <TabPanelComponent title="Completed" status='COMPLETED'/>
+          </TabPanel>
+          <TabPanel>
+            <TabPanelComponent title="Declined" status='DECLINED'/>
           </TabPanel>
         </TabPanels>
       </Tabs>

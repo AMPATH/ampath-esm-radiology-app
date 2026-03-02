@@ -27,6 +27,10 @@ export function useProcedureOrders(status: string) {
 
   let filteredOrders = data?.data?.results?.filter((order) => order.encounter?.location?.uuid === sessionLocation?.uuid);
 
+  if(status === "" && filteredOrders) {
+    filteredOrders = filteredOrders.filter(v => v.fulfillerStatus === null);
+  }
+
   return {
     orders: filteredOrders ?? [],
     isLoading,
