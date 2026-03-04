@@ -48,7 +48,7 @@
     "zod": "^3.23.8"
   },
   "peerDependencies": {
-    "@openmrs/esm-framework": "*",
+    "@openmrs/esm-framework": "9.x",
     "dayjs": "1.x",
     "react": "18.x",
     "react-i18next": "16.x",
@@ -56,7 +56,7 @@
     "rxjs": "6.x"
   },
   "devDependencies": {
-    "@openmrs/esm-framework": "8.0.1-pre.3685",
+    "@openmrs/esm-framework": "next",
     "@openmrs/esm-styleguide": "next",
     "@playwright/test": "^1.52.0",
     "@swc/cli": "^0.3.12",

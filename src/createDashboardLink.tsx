@@ -1,9 +1,36 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { DashboardExtension, type DashboardExtensionProps, type IconId } from '@openmrs/esm-framework';
+import React, { useMemo } from 'react';
+import { ConfigurableLink } from '@openmrs/esm-framework';
+import { BrowserRouter, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-export const createDashboardLink = (config: Omit<DashboardExtensionProps, 'icon'> & { icon?: IconId }) => () => (
+export interface DashboardLinkConfig {
+  name: string;
+  title: string;
+}
+
+function DashboardExtension({ dashboardLinkConfig }: { dashboardLinkConfig: DashboardLinkConfig }) {
+  const { t } = useTranslation();
+  const { name, title } = dashboardLinkConfig;
+  const location = useLocation();
+  const spaBasePath = `${window.spaBase}/home`;
+
+  const isActive = useMemo(() => {
+    const pathSegments = location.pathname.split('/').map((segment) => decodeURIComponent(segment));
+    return pathSegments.includes(name);
+  }, [location.pathname, name]);
+
+  return (
+    <ConfigurableLink
+      to={`${spaBasePath}/${name}`}
+      className={`cds--side-nav__link ${isActive ? 'active-left-nav-link' : ''}`}
+    >
+      {t(title)}
+    </ConfigurableLink>
+  );
+}
+
+export const createDashboardLink = (dashboardLinkConfig: DashboardLinkConfig) => () => (
   <BrowserRouter>
-    <DashboardExtension path={config.path} title={config.title} basePath={config.basePath} icon={config.icon} />
+    <DashboardExtension dashboardLinkConfig={dashboardLinkConfig} />
   </BrowserRouter>
 );

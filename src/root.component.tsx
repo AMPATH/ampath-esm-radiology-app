@@ -1,15 +1,15 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import styles from './root.scss';
-import Procedures from './procedures/procedures.component';
+import ProceduresDashboard from './procedures-dashboard.component';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const Root: React.FC = () => {
-  const { t } = useTranslation();
-
   return (
-    <div className={styles.container}>
-      <Procedures />
-    </div>
+    <BrowserRouter basename={`${window.spaBase}/home/procedures`}>
+      <Routes>
+        <Route path="/" element={<ProceduresDashboard />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

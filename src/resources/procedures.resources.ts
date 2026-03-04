@@ -1,12 +1,13 @@
-import { useSession, useConfig, restBaseUrl, openmrsFetch, type Order } from "@openmrs/esm-framework";
+import { useSession, useConfig, restBaseUrl, openmrsFetch, type Order, useAppContext } from "@openmrs/esm-framework";
 import dayjs from "dayjs";
 import useSWR, { mutate } from 'swr';
 import { type Config } from "../config-schema";
 import { useCallback } from "react";
+import { type DateFilterContext } from "../types";
 
 export function useProcedureOrders(status: string) {
-  const { dateRange } = {
-    dateRange: [dayjs().startOf('day').toDate(), new Date()]
+  const { dateRange } = useAppContext<DateFilterContext>('procedures-date-filter') ?? {
+    dateRange: [dayjs().startOf('day').toDate(), new Date()],
   };
   const { sessionLocation } = useSession();
 
@@ -15,11 +16,11 @@ export function useProcedureOrders(status: string) {
   let url = `${restBaseUrl}/order?orderTypes=${procedureOrderTypeUuid}&v=${customRepresentation}`;
   url = `${url}&fulfillerStatus=${status}`;
   url = `${url}&excludeCanceledAndExpired=true&excludeDiscontinueOrders=true`;
-  // url = dateRange
-  //   ? `${url}&activatedOnOrAfterDate=${dateRange.at(0).toISOString()}&activatedOnOrBeforeDate=${dateRange
-  //     .at(1)
-  //     .toISOString()}`
-  //   : url;
+  url = dateRange
+    ? `${url}&activatedOnOrAfterDate=${dateRange.at(0).toISOString()}&activatedOnOrBeforeDate=${dateRange
+      .at(1)
+      .toISOString()}`
+    : url;
 
   const { data, error, isLoading, isValidating } = useSWR<{
     data: { results: Array<Order> };

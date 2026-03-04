@@ -4,11 +4,16 @@
     "fhir2": ">=1.2",
     "webservices.rest": ">=2.2.0"
   },
-  "pages": [],
+  "pages": [
+    {
+      "component": "root",
+      "route": "procedures"
+    }
+  ],
   "extensions": [
     {
       "name": "procedures-dashboard-link",
-      "component": "proceduresQueueDashboardLink",
+      "component": "proceduresDashboardLink",
       "slot": "homepage-dashboard-slot",
       "meta": {
         "name": "procedures",
@@ -45,6 +50,86 @@
       "name": "add-procedure-request-results-action",
       "component": "addProcedureRequestResultsAction",
       "slot": "inprogress-procedure-tests-actions-slot"
+    },
+    {
+      "name": "ordered-procedure-requests-table",
+      "slot": "procedure-panels-slot",
+      "order": 0,
+      "component": "orderedRequestsTable",
+      "meta": {
+        "name": "orderedProceduresPanel",
+        "title": "Procedures ordered"
+      }
+    },
+    {
+      "name": "inprogress-procedure-requests-table",
+      "slot": "procedure-panels-slot",
+      "component": "inprogressRequestsTable",
+      "order": 1,
+      "meta": {
+        "name": "inprogressProceduresPanel",
+        "title": "In progress"
+      }
+    },
+    {
+      "name": "completed-procedure-requests-table",
+      "slot": "procedure-panels-slot",
+      "component": "completedRequestsTable",
+      "order": 2,
+      "meta": {
+        "name": "completedProceduresPanel",
+        "title": "Completed"
+      }
+    },
+    {
+      "name": "declined-procedure-requests-table",
+      "slot": "procedure-panels-slot",
+      "component": "declinedRequestsTable",
+      "order": 3,
+      "meta": {
+        "name": "declinedProceduresPanel",
+        "title": "Declined"
+      }
+    },
+    {
+      "name": "ordered-procedure-requests-tile",
+      "slot": "procedure-tiles-slot",
+      "component": "orderedRequestsTile",
+      "order": 0,
+      "meta": {
+        "name": "orderedRequestsTile",
+        "title": "Procedures ordered"
+      }
+    },
+    {
+      "name": "inprogress-procedure-requests-tile",
+      "slot": "procedure-tiles-slot",
+      "component": "inProgressRequestsTile",
+      "order": 1,
+      "meta": {
+        "name": "inprogressRequestsTile",
+        "title": "In progress"
+      }
+    },
+    {
+      "name": "completed-procedure-requests-tile",
+      "slot": "procedure-tiles-slot",
+      "component": "completedRequestsTile",
+      "order": 2,
+      "meta": {
+        "name": "completedRequestsTile",
+        "title": "Completed"
+      }
+    },
+    {
+      "name": "declined-procedure-requests-tile",
+      "slot": "procedure-tiles-slot",
+      "component": "declinedRequestsTile",
+      "order": 3,
+      "meta": {
+        "name": "declinedRequestsTile",
+        "title": "Declined procedures"
+      }
     }
   ],
   "workspaces": [
