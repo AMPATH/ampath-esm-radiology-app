@@ -3,12 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@carbon/react';
 import { showModal, type Order } from '@openmrs/esm-framework';
 import styles from './actions.scss';
+import { type BillStatus } from '../types';
 
 interface PickProcedureRequestActionMenuProps {
   order: Order;
+  billStatus: BillStatus;
 }
 
-const PickupProcedureRequestAction: React.FC<PickProcedureRequestActionMenuProps> = ({ order }) => {
+const PickupProcedureRequestAction: React.FC<PickProcedureRequestActionMenuProps> = ({ order, billStatus }) => {
   const { t } = useTranslation();
   const unsupportedStatuses = ['COMPLETED', 'DECLINED', 'IN_PROGRESS', 'ON_HOLD'];
 
@@ -19,7 +21,7 @@ const PickupProcedureRequestAction: React.FC<PickProcedureRequestActionMenuProps
     });
   }, [order]);
 
-  return (
+  return billStatus === 'PAID' ? (
     <Button
       className={styles.actionButton}
       disabled={unsupportedStatuses.includes(order.fulfillerStatus)}
@@ -30,7 +32,7 @@ const PickupProcedureRequestAction: React.FC<PickProcedureRequestActionMenuProps
     >
       {t('pickProcedureRequest', 'Pick procedure request')}
     </Button>
-  );
+  ) : null;
 };
 
 export default PickupProcedureRequestAction;

@@ -42,6 +42,11 @@
       "slot": "procedures-ordered-actions-slot"
     },
     {
+      "name": "generate-bill-request-action",
+      "component": "generateBillRequestAction",
+      "slot": "procedures-ordered-actions-slot"
+    },
+    {
       "name": "reject-procedure-request-action",
       "component": "rejectProcedureRequestAction",
       "slot": "rejected-ordered-procedures-actions-slot"

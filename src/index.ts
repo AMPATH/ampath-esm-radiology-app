@@ -41,6 +41,11 @@ export const rejectProcedureRequestAction = getAsyncLifecycle(
   options,
 );
 
+export const generateBillRequestAction = getAsyncLifecycle(
+  () => import('./actions/generate-bill-request-action.component'),
+  options,
+);
+
 // Modals
 export const pickupProcedureRequestModal = getAsyncLifecycle(
   () => import('./modals/pickup-procedure-request-modal.component'),

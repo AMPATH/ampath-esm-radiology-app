@@ -5,11 +5,17 @@ export const configSchema = {
     _type: Type.UUID,
     _default: "2315ab24-9a4e-4b36-b189-8e74d2c77394",
     _description: ""
-  }
+  },
+  proceduresServiceTypedUuid: {
+    _type: Type.UUID,
+    _default: '3adeq9de-5545-4272-add4-a661005f781e',
+    _description: 'Procedures billable service type',
+  },
 };
 
 export type Config = {
   procedureOrderTypeUuid: string;
+  proceduresServiceTypedUuid: string;
 };
 
 export const StringPath =
