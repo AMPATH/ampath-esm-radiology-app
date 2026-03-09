@@ -42,7 +42,7 @@
       "slot": "procedures-ordered-actions-slot"
     },
     {
-      "name": "generate-bill-request-action",
+      "name": "generate-procedure-bill-request-action",
       "component": "generateBillRequestAction",
       "slot": "procedures-ordered-actions-slot"
     },
