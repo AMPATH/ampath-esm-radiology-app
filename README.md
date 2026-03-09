@@ -1,1 +1,1 @@
-Ampath Procedures app
+Ampath Radiology app

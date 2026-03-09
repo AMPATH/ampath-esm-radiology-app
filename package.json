@@ -1,9 +1,9 @@
 {
-  "name": "@ampath/esm-procedures-app",
-  "version": "4.0.1",
+  "name": "@ampath/esm-radiology-app",
+  "version": "4.0.0",
   "license": "MPL-2.0",
   "description": "An OpenMRS seed application for building microfrontends",
-  "browser": "dist/esm-procedures-app.js",
+  "browser": "dist/esm-radiology-app.js",
   "main": "src/index.ts",
   "source": true,
   "scripts": {
@@ -31,14 +31,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ampath/ampath-esm-procedures-app.git"
+    "url": "git+https://github.com/ampath/ampath-esm-radiology-app.git"
   },
-  "homepage": "https://github.com/ampath/ampath-esm-template-app#readme",
+  "homepage": "https://github.com/ampath/ampath-esm-radiology-app#readme",
   "publishConfig": {
     "access": "public"
   },
   "bugs": {
-    "url": "https://github.com/ampath/ampath-esm-procedures-app/issues"
+    "url": "https://github.com/ampath/ampath-esm-radiology-app/issues"
   },
   "dependencies": {
     "@carbon/react": "^1.83.0",

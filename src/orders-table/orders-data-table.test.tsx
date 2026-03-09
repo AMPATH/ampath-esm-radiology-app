@@ -3,11 +3,11 @@
 // import userEvent from '@testing-library/user-event';
 // import { useConfig, getDefaultsFromConfigSchema, type Order, type Patient } from '@openmrs/esm-framework';
 // import { configSchema, type Config } from '../config-schema';
-// import { useProcedureOrders } from '../resources/procedures.resources';
+// import { useRadiologyOrders } from '../resources/radiology.resources';
 // import OrdersDataTable from './orders-data-table.component';
 
 // jest.mock('../../laboratory.resource', () => ({
-//   useProcedureOrders: jest.fn(),
+//   useRadiologyOrders: jest.fn(),
 // }));
 
 // const mockUseConfig = jest.mocked(useConfig<Config>);

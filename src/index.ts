@@ -8,10 +8,10 @@ import { getAsyncLifecycle, defineConfigSchema, getSyncLifecycle } from '@openmr
 import { configSchema } from './config-schema';
 import { createDashboardLink } from './createDashboardLink';
 
-const moduleName = '@ampath/esm-procedures-app';
+const moduleName = '@ampath/esm-radiology-app';
 
 const options = {
-  featureName: 'procedures',
+  featureName: 'radiology',
   moduleName,
 };
 
@@ -23,21 +23,21 @@ export function startupApp() {
 
 export const root = getAsyncLifecycle(() => import('./root.component'), options);
 
-export const proceduresDashboardLink = getSyncLifecycle(createDashboardLink({ name: 'procedures', title: 'Procedures' }), options);
+export const radiologyDashboardLink = getSyncLifecycle(createDashboardLink({ name: 'radiology', title: 'Radiology' }), options);
 
 // Actions
-export const addProcedureRequestResultsAction = getAsyncLifecycle(
-  () => import('./actions/add-procedure-request-results-action.component'),
+export const addRadiologyRequestResultsAction = getAsyncLifecycle(
+  () => import('./actions/add-radiology-request-results-action.component'),
   options,
 );
 
-export const pickupProcedureRequestAction = getAsyncLifecycle(
-  () => import('./actions/pickup-procedure-request-action.component'),
+export const pickupRadiologyRequestAction = getAsyncLifecycle(
+  () => import('./actions/pickup-radiology-request-action.component'),
   options,
 );
 
-export const rejectProcedureRequestAction = getAsyncLifecycle(
-  () => import('./actions/reject-procedure-request-action.component'),
+export const rejectRadiologyRequestAction = getAsyncLifecycle(
+  () => import('./actions/reject-radiology-request-action.component'),
   options,
 );
 
@@ -47,19 +47,19 @@ export const generateBillRequestAction = getAsyncLifecycle(
 );
 
 // Modals
-export const pickupProcedureRequestModal = getAsyncLifecycle(
-  () => import('./modals/pickup-procedure-request-modal.component'),
+export const pickupRadiologyRequestModal = getAsyncLifecycle(
+  () => import('./modals/pickup-radiology-request-modal.component'),
   options,
 );
 
-export const rejectProcedureRequestModal = getAsyncLifecycle(
-  () => import('./modals/reject-procedure-request-modal.component'),
+export const rejectRadiologyRequestModal = getAsyncLifecycle(
+  () => import('./modals/reject-radiology-request-modal.component'),
   options,
 );
 
 // Workspaces
-export const postProcedureForm = getAsyncLifecycle(
-  () => import('./forms/post-procedures/post-procedure-form.component'),
+export const postRadiologyForm = getAsyncLifecycle(
+  () => import('./forms/post-radiology/post-radiology-form.component'),
   options,
 );
 

@@ -106,7 +106,7 @@ const ListOrderDetails: React.FC<ListOrdersDetailsProps> = ({ groupedOrders, pat
             {order.fulfillerStatus === 'RECEIVED' || order.fulfillerStatus == null ? (
               <>
                 <div className={styles.testsOrderedActions}>
-                  <ExtensionSlot state={{ order: order }} name="rejected-ordered-procedures-actions-slot" />
+                  <ExtensionSlot state={{ order: order }} name="rejected-ordered-radiology-actions-slot" />
                   <OrderedActionsExtensionSlot order={order} bills={bills} isLoading={isLoading} />
                   <ExtensionSlot state={{ order: order }} name="add-lab-order-details-slot" />
                 </div>
@@ -117,7 +117,7 @@ const ListOrderDetails: React.FC<ListOrdersDetailsProps> = ({ groupedOrders, pat
                   <ExtensionSlot
                     className={styles.menuLink}
                     state={{ order: order }}
-                    name="inprogress-procedure-tests-actions-slot"
+                    name="inprogress-radiology-tests-actions-slot"
                   />
                 </div>
               </>

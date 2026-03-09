@@ -6,16 +6,16 @@ import { type Order } from '@openmrs/esm-framework';
 import { type Config } from '../config-schema';
 import styles from './actions.scss';
 
-interface AddProcedureRequestResultsActionProps {
+interface AddRadiologyRequestResultsActionProps {
   order: Order;
 }
 
-const AddProcedureRequestResultsAction: React.FC<AddProcedureRequestResultsActionProps> = ({ order }) => {
+const AddRadiologyRequestResultsAction: React.FC<AddRadiologyRequestResultsActionProps> = ({ order }) => {
   const { t } = useTranslation();
-  const { procedureOrderTypeUuid } = useConfig<Config>();
+  const { radiologyOrderTypeUuid } = useConfig<Config>();
 
   const launchTestResultsWorkspace = () => {
-    launchWorkspace('post-procedure-form-workspace', {
+    launchWorkspace('post-radiology-form-workspace', {
       patient: order.patient,
       order
     });
@@ -26,13 +26,13 @@ const AddProcedureRequestResultsAction: React.FC<AddProcedureRequestResultsActio
       className={styles.actionButton}
       kind="primary"
       renderIcon={() => <AddIcon className={styles.actionButtonIcon} />}
-      iconDescription={t('addProcedureResult', 'Add procedure results')}
+      iconDescription={t('addRadiologyResult', 'Add radiology results')}
       onClick={launchTestResultsWorkspace}
       size="sm"
     >
-      {t('addProcedureResult', 'Add procedure results')}
+      {t('addRadiologyResult', 'Add radiology results')}
     </Button>
   );
 };
 
-export default AddProcedureRequestResultsAction;
+export default AddRadiologyRequestResultsAction;

@@ -4,16 +4,16 @@ import { useTranslation } from 'react-i18next';
 import { showModal, type Order } from '@openmrs/esm-framework';
 import styles from './actions.scss';
 
-interface RejectProcedureRequestActionProps {
+interface RejectRadiologyRequestActionProps {
   order: Order;
 }
 
-const RejectProcedureRequestAction: React.FC<RejectProcedureRequestActionProps> = ({ order }) => {
+const RejectRadiologyRequestAction: React.FC<RejectRadiologyRequestActionProps> = ({ order }) => {
   const { t } = useTranslation();
   const unsupportedStatuses = ['COMPLETED', 'DECLINED'];
 
   const launchRejectLabRequestModal = useCallback(() => {
-    const dispose = showModal('reject-procedure-request-modal', {
+    const dispose = showModal('reject-radiology-request-modal', {
       closeModal: () => dispose(),
       order,
     });
@@ -28,9 +28,9 @@ const RejectProcedureRequestAction: React.FC<RejectProcedureRequestActionProps> 
       size="sm"
       onClick={launchRejectLabRequestModal}
     >
-      {t('rejectProcedureRequest', 'Reject procedure request')}
+      {t('rejectRadiologyRequest', 'Reject radiology request')}
     </Button>
   );
 };
 
-export default RejectProcedureRequestAction;
+export default RejectRadiologyRequestAction;

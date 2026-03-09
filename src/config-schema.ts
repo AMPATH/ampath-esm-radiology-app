@@ -1,21 +1,21 @@
 import { Type } from '@openmrs/esm-framework';
 
 export const configSchema = {
-  procedureOrderTypeUuid: {
+  radiologyOrderTypeUuid: {
     _type: Type.UUID,
-    _default: "2315ab24-9a4e-4b36-b189-8e74d2c77394",
+    _default: "ff4485a4-f071-4423-aeb2-db6efce52b83",
     _description: ""
   },
-  proceduresServiceTypedUuid: {
+  radiologyServiceTypedUuid: {
     _type: Type.UUID,
-    _default: '3adeq9de-5545-4272-add4-a661005f781e',
-    _description: 'Procedures billable service type',
+    _default: '3jdeq9de-9145-4272-add4-a251005f781e',
+    _description: 'Radiology billable service type',
   },
 };
 
 export type Config = {
-  procedureOrderTypeUuid: string;
-  proceduresServiceTypedUuid: string;
+  radiologyOrderTypeUuid: string;
+  radiologyServiceTypedUuid: string;
 };
 
 export const StringPath =

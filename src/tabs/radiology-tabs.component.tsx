@@ -7,11 +7,11 @@ import { Extension, useAssignedExtensions } from '@openmrs/esm-framework';
 // eslint-disable-next-line no-restricted-imports
 import { ComponentContext } from '@openmrs/esm-framework/src/internal';
 import { type Config } from '../config-schema';
-import styles from './procedure-tabs.scss';
+import styles from './radiology-tabs.scss';
 
-const panelSlot = 'procedure-panels-slot';
+const panelSlot = 'radiology-panels-slot';
 
-const ProcedureOrdersTabs: React.FC = () => {
+const RadiologyOrdersTabs: React.FC = () => {
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState(0);
   const tabExtensions = useAssignedExtensions(panelSlot);
@@ -29,7 +29,7 @@ const ProcedureOrdersTabs: React.FC = () => {
       <section>
         <div className={styles.tabs}>
           <Tabs selectedIndex={selectedTab} onChange={({ selectedIndex }) => setSelectedTab(selectedIndex)}>
-            <TabList aria-label="Procedure tabs" contained>
+            <TabList aria-label="Radiology tabs" contained>
               {filteredExtensions.map((extension) => {
                 const { name, title } = extension.meta ?? {};
 
@@ -54,7 +54,7 @@ const ProcedureOrdersTabs: React.FC = () => {
                     key={extension.id}
                     value={{
                       moduleName: extension.moduleName,
-                      featureName: 'procedures',
+                      featureName: 'radiology',
                       extension: {
                         extensionId: extension.id,
                         extensionSlotName: panelSlot,
@@ -74,4 +74,4 @@ const ProcedureOrdersTabs: React.FC = () => {
   );
 };
 
-export default ProcedureOrdersTabs;
+export default RadiologyOrdersTabs;

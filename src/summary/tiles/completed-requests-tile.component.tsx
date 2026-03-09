@@ -1,17 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useProcedureOrders } from '../../resources/procedures.resources';
+import { useRadiologyOrders } from '../../resources/radiology.resources';
 import SummaryTile from '../summary-tile/summary-tile.component';
 
 const CompletedRequestsTile = () => {
   const { t } = useTranslation();
-   const { orders } = useProcedureOrders("COMPLETED");
+   const { orders } = useRadiologyOrders("COMPLETED");
 
   return (
     <SummaryTile
       label={t('completed', 'Completed')}
       value={orders?.length}
-      headerLabel={t('proceduresCompleted', 'Procedures completed')}
+      headerLabel={t('radiologyCompleted', 'Radiology completed')}
     />
   );
 };

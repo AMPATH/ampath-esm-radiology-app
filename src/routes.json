@@ -7,108 +7,108 @@
   "pages": [
     {
       "component": "root",
-      "route": "procedures"
+      "route": "radiology"
     }
   ],
   "extensions": [
     {
-      "name": "procedures-dashboard-link",
-      "component": "proceduresDashboardLink",
+      "name": "radiology-dashboard-link",
+      "component": "radiologyDashboardLink",
       "slot": "homepage-dashboard-slot",
       "meta": {
-        "name": "procedures",
-        "slot": "procedures-dashboard-slot",
-        "title": "Procedures"
+        "name": "radiology",
+        "slot": "radiology-dashboard-slot",
+        "title": "Radiology & Imaging"
       },
       "online": true,
       "offline": true
     },
     {
       "component": "root",
-      "name": "procedures",
-      "slot": "procedures-dashboard-slot"
+      "name": "radiology",
+      "slot": "radiology-dashboard-slot"
     },
     {
-      "name": "pickup-procedure-request-modal",
-      "component": "pickupProcedureRequestModal"
+      "name": "pickup-radiology-request-modal",
+      "component": "pickupRadiologyRequestModal"
     },
     {
-      "name": "reject-procedure-request-modal",
-      "component": "rejectProcedureRequestModal"
+      "name": "reject-radiology-request-modal",
+      "component": "rejectRadiologyRequestModal"
     },
     {
-      "name": "pick-procedure-request-action",
-      "component": "pickupProcedureRequestAction",
-      "slot": "procedures-ordered-actions-slot"
+      "name": "pick-radiology-request-action",
+      "component": "pickupRadiologyRequestAction",
+      "slot": "radiology-ordered-actions-slot"
     },
     {
-      "name": "generate-procedure-bill-request-action",
+      "name": "generate-radiology-bill-request-action",
       "component": "generateBillRequestAction",
-      "slot": "procedures-ordered-actions-slot"
+      "slot": "radiology-ordered-actions-slot"
     },
     {
-      "name": "reject-procedure-request-action",
-      "component": "rejectProcedureRequestAction",
-      "slot": "rejected-ordered-procedures-actions-slot"
+      "name": "reject-radiology-request-action",
+      "component": "rejectRadiologyRequestAction",
+      "slot": "rejected-ordered-radiology-actions-slot"
     },
     {
-      "name": "add-procedure-request-results-action",
-      "component": "addProcedureRequestResultsAction",
-      "slot": "inprogress-procedure-tests-actions-slot"
+      "name": "add-radiology-request-results-action",
+      "component": "addRadiologyRequestResultsAction",
+      "slot": "inprogress-radiology-tests-actions-slot"
     },
     {
-      "name": "ordered-procedure-requests-table",
-      "slot": "procedure-panels-slot",
+      "name": "ordered-radiology-requests-table",
+      "slot": "radiology-panels-slot",
       "order": 0,
       "component": "orderedRequestsTable",
       "meta": {
-        "name": "orderedProceduresPanel",
-        "title": "Procedures ordered"
+        "name": "orderedRadiologyPanel",
+        "title": "Radiology ordered"
       }
     },
     {
-      "name": "inprogress-procedure-requests-table",
-      "slot": "procedure-panels-slot",
+      "name": "inprogress-radiology-requests-table",
+      "slot": "radiology-panels-slot",
       "component": "inprogressRequestsTable",
       "order": 1,
       "meta": {
-        "name": "inprogressProceduresPanel",
+        "name": "inprogressRadiologyPanel",
         "title": "In progress"
       }
     },
     {
-      "name": "completed-procedure-requests-table",
-      "slot": "procedure-panels-slot",
+      "name": "completed-radiology-requests-table",
+      "slot": "radiology-panels-slot",
       "component": "completedRequestsTable",
       "order": 2,
       "meta": {
-        "name": "completedProceduresPanel",
+        "name": "completedRadiologyPanel",
         "title": "Completed"
       }
     },
     {
-      "name": "declined-procedure-requests-table",
-      "slot": "procedure-panels-slot",
+      "name": "declined-radiology-requests-table",
+      "slot": "radiology-panels-slot",
       "component": "declinedRequestsTable",
       "order": 3,
       "meta": {
-        "name": "declinedProceduresPanel",
+        "name": "declinedRadiologyPanel",
         "title": "Declined"
       }
     },
     {
-      "name": "ordered-procedure-requests-tile",
-      "slot": "procedure-tiles-slot",
+      "name": "ordered-radiology-requests-tile",
+      "slot": "radiology-tiles-slot",
       "component": "orderedRequestsTile",
       "order": 0,
       "meta": {
         "name": "orderedRequestsTile",
-        "title": "Procedures ordered"
+        "title": "Radiology ordered"
       }
     },
     {
-      "name": "inprogress-procedure-requests-tile",
-      "slot": "procedure-tiles-slot",
+      "name": "inprogress-radiology-requests-tile",
+      "slot": "radiology-tiles-slot",
       "component": "inProgressRequestsTile",
       "order": 1,
       "meta": {
@@ -117,8 +117,8 @@
       }
     },
     {
-      "name": "completed-procedure-requests-tile",
-      "slot": "procedure-tiles-slot",
+      "name": "completed-radiology-requests-tile",
+      "slot": "radiology-tiles-slot",
       "component": "completedRequestsTile",
       "order": 2,
       "meta": {
@@ -127,21 +127,21 @@
       }
     },
     {
-      "name": "declined-procedure-requests-tile",
-      "slot": "procedure-tiles-slot",
+      "name": "declined-radiology-requests-tile",
+      "slot": "radiology-tiles-slot",
       "component": "declinedRequestsTile",
       "order": 3,
       "meta": {
         "name": "declinedRequestsTile",
-        "title": "Declined procedures"
+        "title": "Declined radiology"
       }
     }
   ],
   "workspaces": [
     {
-      "name": "post-procedure-form-workspace",
-      "component": "postProcedureForm",
-      "title": "procedure results",
+      "name": "post-radiology-form-workspace",
+      "component": "postRadiologyForm",
+      "title": "radiology results",
       "type": "other-form"
     }
   ]

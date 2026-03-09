@@ -20,21 +20,19 @@ const GenerateBillRequestAction: React.FC<GenerateBillRequestActionMenuProps> = 
   mutated,
 }) => {
   const { t } = useTranslation();
-  const { proceduresServiceTypedUuid } = useConfig<Config>();
+  const { radiologyServiceTypedUuid } = useConfig<Config>();
 
   const launchBillWorkspace = () => {
     launchWorkspace('create-order-bill-form-workspace', {
       workspaceTitle: t('createOrderBill', 'Create order bill form'),
       order,
       quantity: 1,
-      serviceTypeUuid: proceduresServiceTypedUuid,
+      serviceTypeUuid: radiologyServiceTypedUuid,
       mutated,
     });
   };
 
-  return isLoading ? (
-    <InlineLoading description="Checking bills" />
-  ) : billStatus === 'PENDING' ? (
+  return billStatus === 'PENDING' ? (
     <Button className={styles.actionButton} size="sm" kind="secondary" key={order.uuid}>
       {t('pendingPayment', 'Pending payment')}
     </Button>

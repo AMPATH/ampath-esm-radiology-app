@@ -1,11 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useProcedureOrders } from '../../resources/procedures.resources';
+import { useRadiologyOrders } from '../../resources/radiology.resources';
 import SummaryTile from '../summary-tile/summary-tile.component';
 
 const InProgressRequestsTile = () => {
   const { t } = useTranslation();
-  const { orders } = useProcedureOrders("IN_PROGRESS");
+  const { orders } = useRadiologyOrders("IN_PROGRESS");
 
   return (
     <SummaryTile

@@ -26,10 +26,10 @@ export const useProviders = () => {
   };
 };
 
-export const savePostProcedure = async (postProcedure: object) => {
-  const response = await openmrsFetch(`${restBaseUrl}/procedure`, {
+export const savePostRadiology = async (payload: object) => {
+  const response = await openmrsFetch(`${restBaseUrl}/radiology`, {
     method: "POST",
-    body: JSON.stringify(postProcedure),
+    body: JSON.stringify(payload),
     headers: {
       "Content-Type": "application/json",
     },

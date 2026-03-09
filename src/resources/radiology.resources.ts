@@ -5,15 +5,15 @@ import { type Config } from "../config-schema";
 import { useCallback } from "react";
 import { type DateFilterContext } from "../types";
 
-export function useProcedureOrders(status: string) {
-  const { dateRange } = useAppContext<DateFilterContext>('procedures-date-filter') ?? {
+export function useRadiologyOrders(status: string) {
+  const { dateRange } = useAppContext<DateFilterContext>('radiology-date-filter') ?? {
     dateRange: [dayjs().startOf('day').toDate(), new Date()],
   };
   const { sessionLocation } = useSession();
 
-  const { procedureOrderTypeUuid } = useConfig<Config>();
+  const { radiologyOrderTypeUuid } = useConfig<Config>();
   const customRepresentation = `custom:(uuid,orderNumber,patient:(uuid,display,person:(uuid,display,age,birthdate,gender),identifiers:(preferred,uuid,voided)),concept:(uuid,display),action,careSetting:(uuid,display,description,careSettingType,display),previousOrder,dateActivated,scheduledDate,dateStopped,autoExpireDate,encounter:(uuid,display,location:(uuid)),orderer:(uuid,display),orderReason,orderReasonNonCoded,orderType:(uuid,display,name,description,conceptClasses,parent),urgency,instructions,commentToFulfiller,display,fulfillerStatus,fulfillerComment,accessionNumber)`;
-  let url = `${restBaseUrl}/order?orderTypes=${procedureOrderTypeUuid}&v=${customRepresentation}`;
+  let url = `${restBaseUrl}/order?orderTypes=${radiologyOrderTypeUuid}&v=${customRepresentation}`;
   url = `${url}&fulfillerStatus=${status}`;
   url = `${url}&excludeCanceledAndExpired=true&excludeDiscontinueOrders=true`;
   url = dateRange
@@ -51,7 +51,7 @@ export function setFulfillerStatus(orderId: string, status: string, abortControl
   });
 }
 
-export function rejectProcedureOrder(orderId: string, comment: string, abortController: AbortController) {
+export function rejectRadiologyOrder(orderId: string, comment: string, abortController: AbortController) {
   return openmrsFetch(`${restBaseUrl}/order/${orderId}/fulfillerdetails/`, {
     method: 'POST',
     headers: {
@@ -65,14 +65,14 @@ export function rejectProcedureOrder(orderId: string, comment: string, abortCont
   });
 }
 
-export function useInvalidateProcedureOrders() {
-  const { procedureOrderTypeUuid } = useConfig<Config>();
+export function useInvalidateRadiologyOrders() {
+  const { radiologyOrderTypeUuid } = useConfig<Config>();
 
   return useCallback(() => {
     mutate(
-      (key) => typeof key === 'string' && key.startsWith(`${restBaseUrl}/order?orderTypes=${procedureOrderTypeUuid}`),
+      (key) => typeof key === 'string' && key.startsWith(`${restBaseUrl}/order?orderTypes=${radiologyOrderTypeUuid}`),
       undefined,
       { revalidate: true },
     );
-  }, [procedureOrderTypeUuid]);
+  }, [radiologyOrderTypeUuid]);
 }

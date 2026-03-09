@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ModalBody, ModalFooter, ModalHeader } from '@carbon/react';
 import { showNotification, showSnackbar, useAbortController, type Order } from '@openmrs/esm-framework';
-import { setFulfillerStatus, useInvalidateProcedureOrders } from '../resources/procedures.resources';
+import { setFulfillerStatus, useInvalidateRadiologyOrders } from '../resources/radiology.resources';
 
-interface PickupProcedureRequestModal {
+interface PickupRadiologyRequestModal {
   closeModal: () => void;
   order: Order;
 }
 
-const PickupProcedureRequestModal: React.FC<PickupProcedureRequestModal> = ({ order, closeModal }) => {
+const PickupRadiologyRequestModal: React.FC<PickupRadiologyRequestModal> = ({ order, closeModal }) => {
   const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const abortController = useAbortController();
-  const invalidateOrders = useInvalidateProcedureOrders();
+  const invalidateOrders = useInvalidateRadiologyOrders();
 
   const handlePickup = () => {
     setIsSubmitting(true);
@@ -43,11 +43,11 @@ const PickupProcedureRequestModal: React.FC<PickupProcedureRequestModal> = ({ or
 
   return (
     <div>
-      <ModalHeader closeModal={closeModal} title={t('procedureRequest', 'Procedure request')} />
+      <ModalHeader closeModal={closeModal} title={t('radiologyRequest', 'Radiology request')} />
       <ModalBody>
         <p>
           {t(
-            'procedureRequestConfirmation',
+            'radiologyRequestConfirmation',
             'Selecting Continue will move the ticket to "In Progress". Do you wish to proceed?',
           )}
         </p>
@@ -57,11 +57,11 @@ const PickupProcedureRequestModal: React.FC<PickupProcedureRequestModal> = ({ or
           {t('discard', 'Discard')}
         </Button>
         <Button type="submit" onClick={handlePickup} disabled={isSubmitting}>
-          {t('pickupProcedureRequest', 'Pick up procedure request')}
+          {t('pickupRadiologyRequest', 'Pick up radiology request')}
         </Button>
       </ModalFooter>
     </div>
   );
 };
 
-export default PickupProcedureRequestModal;
+export default PickupRadiologyRequestModal;

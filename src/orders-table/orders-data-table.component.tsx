@@ -26,7 +26,7 @@ import { ExtensionSlot, formatDate, parseDate, showModal, useConfig, usePaginati
 import { useTranslation } from 'react-i18next';
 import { type FulfillerStatus, type FlattenedOrder, type Order } from '../types';
 import { type Config } from '../config-schema';
-import { useProcedureOrders } from '../resources/procedures.resources';
+import { useRadiologyOrders } from '../resources/radiology.resources';
 import { OrdersDateRangePicker } from './orders-date-range-picker.component';
 import ListOrderDetails from './list-order-details.component';
 import styles from './orders-data-table.scss';
@@ -77,7 +77,7 @@ const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
   const { t } = useTranslation();
   const [searchString, setSearchString] = useState('');
 
-  const { orders, isLoading } = useProcedureOrders(
+  const { orders, isLoading } = useRadiologyOrders(
     props.status
   );
 
@@ -166,7 +166,7 @@ const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
 
   const handlePrintModal = (orders: Array<Order>) => {
     const completedOrders = orders.filter((order) => order.fulfillerStatus === 'COMPLETED');
-    const dispose = showModal('print-lab-results-modal', {
+    const dispose = showModal('print-radiology-results-modal', {
       closeModal: () => dispose(),
       orders: completedOrders,
     });
@@ -174,11 +174,11 @@ const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
 
   const handleLaunchModal = (orders: Array<Order>) => {
     const completedOrders = orders.filter((order) => order.fulfillerStatus === 'COMPLETED');
-    const dispose = showModal('edit-lab-results-modal', {
+    const dispose = showModal('edit-radiology-results-modal', {
       orders: completedOrders,
       closeModal: () => dispose(),
       patient: completedOrders[0]?.patient,
-      workspaceName: 'lab-app-test-results-form-workspace',
+      workspaceName: 'radiology-app-test-results-form-workspace',
     });
   };
 
@@ -270,7 +270,7 @@ const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
             <div className={styles.tileContainer}>
               <Tile className={styles.tile}>
                 <div className={styles.tileContent}>
-                  <p className={styles.content}>{t('noProcedureRequestsFound', 'No procedure requests found')}</p>
+                  <p className={styles.content}>{t('noRadiologyRequestsFound', 'No radiology requests found')}</p>
                   <p className={styles.emptyStateHelperText}>
                     {t('checkFilters', 'Please check the filters above and try again')}
                   </p>
