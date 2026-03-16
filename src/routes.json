@@ -141,7 +141,7 @@
     {
       "name": "post-radiology-form-workspace",
       "component": "postRadiologyForm",
-      "title": "radiology results",
+      "title": "Radiology results",
       "type": "other-form"
     }
   ]

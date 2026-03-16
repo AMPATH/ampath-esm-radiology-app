@@ -16,7 +16,7 @@ const RadiologyDashboard: React.FC = () => {
     <div>
       <PageHeader
         illustration={<XrayPictogram />}
-        title={t('radiologyAndImaging', 'Radiology & Imaging')}
+        title={t('radiologyAndImaging', 'Radiology and Imaging')}
         className={styles.pageHeader}
       />
       <div>

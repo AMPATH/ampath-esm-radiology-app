@@ -1,7 +1,9 @@
 import React, { useCallback, useState } from "react";
 import {
   closeWorkspace,
+  ExtensionSlot,
   OpenmrsDatePicker,
+  ResponsiveWrapper,
   showSnackbar,
   useConfig,
   useDebounce,
@@ -41,10 +43,7 @@ import { useInvalidateRadiologyOrders } from "../../resources/radiology.resource
 const validationSchema = z.object({
   startDatetime: z.date({ required_error: "Start datetime is required" }),
   endDatetime: z.date({ required_error: "End datetime is required" }),
-  outcome: z.string({ required_error: "Outcome is required" }),
-  radiologyReport: z.string({ required_error: "radiology report is required" }),
-  participants: z.string().optional(),
-  complications: z.string().optional(),
+  radiologyReport: z.string({ required_error: "radiology report is required" })
 });
 
 type PostRadiologyFormSchema = z.infer<typeof validationSchema>;
@@ -265,6 +264,11 @@ const PostRadiologyForm: React.FC<PostRadiologyFormProps> = ({
               />
             )}
           />
+        </Layer>
+        <Layer>
+          <ResponsiveWrapper>
+            <ExtensionSlot name="patient-chart-attachments-dashboard-slot" state={{ patientUuid: order?.patient?.uuid }} />
+          </ResponsiveWrapper>
         </Layer>
       </Stack>
       <ButtonSet className={styles.buttonSetContainer}>
