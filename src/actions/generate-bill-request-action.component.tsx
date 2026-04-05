@@ -33,7 +33,7 @@ const GenerateBillRequestAction: React.FC<GenerateBillRequestActionMenuProps> = 
   };
 
   return billStatus === 'PENDING' ? (
-    <Button className={styles.actionButton} size="sm" kind="secondary" key={order.uuid}>
+    <Button className={styles.actionButton} size="sm" kind="danger" key={order.uuid}>
       {t('pendingPayment', 'Pending payment')}
     </Button>
   ) : billStatus === 'BLANK' ? (
