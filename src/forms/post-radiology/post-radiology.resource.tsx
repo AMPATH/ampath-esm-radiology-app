@@ -5,7 +5,7 @@ import {
   restBaseUrl,
   useConfig,
 } from "@openmrs/esm-framework";
-import { type CodedProvider, type CodedCondition } from "../../types";
+import { type CodedProvider, type CodedCondition, type Order } from "../../types";
 
 type Provider = {
   uuid: string;
@@ -77,4 +77,66 @@ export async function updateOrder(uuid: string, body: any) {
     signal: abortController.signal,
     body: body,
   });
+}
+
+export async function updateOrderResult(
+  orderUuid: string,
+  encounterUuid: string,
+  obsPayload: any,
+  body: any,
+  abortController: AbortController,
+) {
+  const saveEncounter = await openmrsFetch(`${restBaseUrl}/encounter/${encounterUuid}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    signal: abortController.signal,
+    body: obsPayload,
+  });
+
+  if (saveEncounter.ok) {
+    const fulfillOrder = await openmrsFetch(`${restBaseUrl}/order/${orderUuid}/fulfillerdetails/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      signal: abortController.signal,
+      body: body,
+    });
+    return fulfillOrder;
+  }
+  throw new Error('Failed to update order');
+}
+
+export function useOrderResults(
+  order: Order,
+  radiologyReportFreetextUuid: any
+) {
+  const customRepresentation = `v=custom:(uuid,concept:(uuid,display),value,status,order:(uuid,orderNumber))`;
+  const url = `${restBaseUrl}/obs?patient=${order.patient.uuid}&encounter=${order.encounter.uuid}&${customRepresentation}`;
+  const { data, error, isLoading } = useSWR<
+    {
+      data: {
+        results: Array<{
+          uuid: string,
+          value: string,
+          concept: {
+            uuid: string
+          },
+          order: {
+            uuid: string,
+            orderNumber: string
+          }
+        }>
+      }
+    },
+    Error
+  >(url, openmrsFetch);
+  const results = data?.data?.results;
+  const obs = results?.find(v => v?.concept?.uuid === radiologyReportFreetextUuid && v?.order?.uuid === order?.uuid);
+  return {
+    isLoading,
+    data: obs
+  }
 }

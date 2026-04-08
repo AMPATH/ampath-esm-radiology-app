@@ -11,11 +11,17 @@ export const configSchema = {
     _default: '3jdeq9de-9145-4272-add4-a251005f781e',
     _description: 'Radiology billable service type',
   },
+  radiologyReportFreetextUuid: {
+    _type: Type.UUID,
+    _default: '312810e7-03b4-481d-bbdd-24919478dbb5',
+    _description: 'A freetext question to capture Radiology report'
+  }
 };
 
 export type Config = {
   radiologyOrderTypeUuid: string;
   radiologyServiceTypedUuid: string;
+  radiologyReportFreetextUuid: string;
 };
 
 export const StringPath =

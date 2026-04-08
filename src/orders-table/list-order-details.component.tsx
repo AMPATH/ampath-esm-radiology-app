@@ -15,6 +15,7 @@ import { type GroupedOrders } from '../types';
 import styles from './list-order-details.scss';
 import { useBills } from '../bill/bill.resource';
 import OrderedActionsExtensionSlot from './ordered-actions-extension-slot/ordered-actions-extension-slot';
+import OrderResults from '../orders-results/order-results.component';
 
 type OrderDetailsRowProps = {
   label: ReactNode;
@@ -92,11 +93,7 @@ const ListOrderDetails: React.FC<ListOrdersDetailsProps> = ({ groupedOrders, pat
                 title={<span className={styles.accordionTitle}>{t('viewTestResults', 'View test results')}</span>}
               >
                 <div className={styles.viewResults}>
-                  <ExtensionSlot
-                    className={styles.labResultSlot}
-                    state={{ order: order }}
-                    name="completed-lab-order-results-slot"
-                  />
+                  <OrderResults order={order} />
                 </div>
               </AccordionItem>
             </Accordion>

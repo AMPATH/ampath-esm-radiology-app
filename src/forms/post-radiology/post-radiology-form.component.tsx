@@ -5,6 +5,7 @@ import {
   OpenmrsDatePicker,
   ResponsiveWrapper,
   showSnackbar,
+  useAbortController,
   useConfig,
   useDebounce,
   useSession,
@@ -31,6 +32,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   savePostRadiology,
   updateOrder,
+  updateOrderResult,
   useConditionsSearch,
   useProvidersSearch,
 } from "./post-radiology.resource";
@@ -55,6 +57,7 @@ type PostRadiologyFormProps = {
 const PostRadiologyForm: React.FC<PostRadiologyFormProps> = ({
   order
 }) => {
+  const abortController = useAbortController();
   const { sessionLocation } = useSession();
   const { t } = useTranslation();
   const invalidateOrders = useInvalidateRadiologyOrders();
@@ -113,7 +116,8 @@ const PostRadiologyForm: React.FC<PostRadiologyFormProps> = ({
   }, []);
 
   const {
-    radiologyOrderTypeUuid
+    radiologyOrderTypeUuid,
+    radiologyReportFreetextUuid
   } = useConfig<Config>();
 
   const {
@@ -174,19 +178,34 @@ const PostRadiologyForm: React.FC<PostRadiologyFormProps> = ({
       // ) {
 
       // } 
-      updateOrder(order.uuid, body) &&
+      const obsPayload = {
+        obs: [
+          {
+            value: data.radiologyReport,
+            concept: {
+              uuid: radiologyReportFreetextUuid,
+            },
+            status: 'FINAL',
+            order: {
+              uuid: order.uuid
+            }
+          }]
+      };
+      updateOrderResult(order.uuid, order.encounter.uuid, obsPayload, body, abortController).then((v) => {
+        // updateOrder(order.uuid, body) &&
         showSnackbar({
           title: t("radiologySaved", "Radiology saved"),
           subtitle: t(
             "radiologySavedSuccessfully",
-            "radiology saved successfully"
+            "Radiology saved successfully"
           ),
           timeoutInMs: 5000,
           isLowContrast: true,
           kind: "success",
         });
-      invalidateOrders();
-      closeWorkspace('post-radiology-form-workspace');
+        invalidateOrders();
+        closeWorkspace('post-radiology-form-workspace');
+      });
     } catch (error) {
       showSnackbar({
         title: t("error", "Error"),
