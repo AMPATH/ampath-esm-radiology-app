@@ -15,6 +15,11 @@ export const configSchema = {
     _type: Type.UUID,
     _default: '312810e7-03b4-481d-bbdd-24919478dbb5',
     _description: 'A freetext question to capture Radiology report'
+  },
+  enableOdooBilling: {
+    _type: Type.Boolean,
+    _default: false,
+    _description: 'Enable Odoo billing'
   }
 };
 
@@ -22,6 +27,7 @@ export type Config = {
   radiologyOrderTypeUuid: string;
   radiologyServiceTypedUuid: string;
   radiologyReportFreetextUuid: string;
+  enableOdooBilling: boolean;
 };
 
 export const StringPath =
