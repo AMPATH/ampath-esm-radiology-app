@@ -20,7 +20,17 @@ export const configSchema = {
     _type: Type.Boolean,
     _default: false,
     _description: 'Enable Odoo billing'
-  }
+  },
+  blockedPaymentModes: {
+    _type: Type.Array,
+    _default: ['MPESA', 'CASH'],
+    _description: 'Payment modes that require bill generation before picking an order',
+  },
+  serviceUuid: {
+    _type: Type.UUID,
+    _default: '2d4472e2-d7ab-4430-8e0e-a9ffcd809bf4',
+    _description: 'Service Uuid for filtering queues',
+  },
 };
 
 export type Config = {
@@ -28,6 +38,8 @@ export type Config = {
   radiologyServiceTypedUuid: string;
   radiologyReportFreetextUuid: string;
   enableOdooBilling: boolean;
+  blockedPaymentModes: Array<string>;
+  serviceUuid: string;
 };
 
 export const StringPath =

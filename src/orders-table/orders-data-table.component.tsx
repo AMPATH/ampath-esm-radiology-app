@@ -26,10 +26,11 @@ import { ExtensionSlot, formatDate, parseDate, showModal, useConfig, usePaginati
 import { useTranslation } from 'react-i18next';
 import { type FulfillerStatus, type FlattenedOrder, type Order } from '../types';
 import { type Config } from '../config-schema';
-import { useRadiologyOrders } from '../resources/radiology.resources';
+import { useQueueEntries, useRadiologyOrders } from '../resources/radiology.resources';
 import { OrdersDateRangePicker } from './orders-date-range-picker.component';
 import ListOrderDetails from './list-order-details.component';
 import styles from './orders-data-table.scss';
+import PriorityTag from './priority-tag.component';
 
 const tableColumnSpec = {
   patientName: {
@@ -51,6 +52,12 @@ const tableColumnSpec = {
     headerLabelKey: 'patientSex',
     headerLabelDefault: 'Sex',
     key: 'patientSex',
+  },
+  priority: {
+    // t('priority', 'Priority')
+    headerLabelKey: 'priority',
+    headerLabelDefault: 'Priority',
+    key: 'priority',
   },
   totalOrders: {
     headerLabelKey: 'totalOrders',
@@ -76,6 +83,8 @@ export interface OrdersDataTableProps {
 const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
   const { t } = useTranslation();
   const [searchString, setSearchString] = useState('');
+
+  const { queueEntries } = useQueueEntries();
 
   const { orders, isLoading } = useRadiologyOrders(
     props.status
@@ -108,6 +117,9 @@ const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
         const labOrdersForPatient = orders.filter((order) => order.patient.uuid === patientUuid);
         const patient = labOrdersForPatient[0]?.patient;
         const flattenedLabOrdersForPatient = flattenedLabOrders.filter((order) => order.patientUuid === patientUuid);
+
+        const priority = queueEntries?.find((q) => q.patient_uuid === patientUuid)?.priority ?? 'NON-URGENT';
+
         return {
           patientId: patient?.identifiers?.find(
             (identifier) =>
@@ -119,6 +131,7 @@ const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
           patientAge: patient?.person?.age,
           patientDob: patient?.person?.birthdate ? formatDate(parseDate(patient.person.birthdate)) : undefined,
           patientSex: patient?.person?.gender,
+          priority: priority,
           totalOrders: flattenedLabOrdersForPatient.length,
           orders: flattenedLabOrdersForPatient,
           originalOrders: labOrdersForPatient,
@@ -248,9 +261,18 @@ const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
               {rows.map((row) => (
                 <React.Fragment key={row.id}>
                   <TableExpandRow {...getRowProps({ row })} key={row.id}>
-                    {row.cells.map((cell) => (
-                      <TableCell key={cell.id}>{cell.value?.content ?? cell.value}</TableCell>
-                    ))}
+                    {row.cells.map((cell) => {
+                      if (cell.info.header === 'priority') {
+                        return (
+                          <TableCell key={cell.id}>
+                            <PriorityTag status={cell.value?.content ?? cell.value} />
+                          </TableCell>
+                        );
+                      }
+                      return (
+                        <TableCell key={cell.id}>{cell.value?.content ?? cell.value}</TableCell>
+                      )
+                    })}
                   </TableExpandRow>
                   {row.isExpanded ? (
                     <TableExpandedRow colSpan={headers.length + 2}>
