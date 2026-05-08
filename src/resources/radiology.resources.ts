@@ -2,8 +2,9 @@ import { useSession, useConfig, restBaseUrl, openmrsFetch, type Order, useAppCon
 import dayjs from "dayjs";
 import useSWR, { mutate } from 'swr';
 import { type Config } from "../config-schema";
-import { useCallback } from "react";
-import { type DateFilterContext } from "../types";
+import { useCallback, useEffect, useState } from "react";
+import { type QueueEntryResult, type DateFilterContext } from "../types";
+import { getEtlBaseUrl } from "../utils/utils";
 
 export function useRadiologyOrders(status: string) {
   const { dateRange } = useAppContext<DateFilterContext>('radiology-date-filter') ?? {
@@ -36,6 +37,39 @@ export function useRadiologyOrders(status: string) {
     orders: filteredOrders ?? [],
     isLoading,
     isError: error,
+    isValidating,
+  };
+}
+
+export function useQueueEntries(patientUuid: string = '') {
+  const [etlBaseUrl, setEtlBaseUrl] = useState('');
+  const { sessionLocation } = useSession();
+  const { serviceUuid } = useConfig<Config>();
+
+  useEffect(() => {
+    const fetchEtlBaseUrl = async () => {
+      const baseUrl = await getEtlBaseUrl();
+      setEtlBaseUrl(baseUrl);
+    };
+    fetchEtlBaseUrl();
+  }, []);
+
+  const url = `${etlBaseUrl}/queue-entry?locationUuid=${sessionLocation?.uuid}&serviceUuid=${serviceUuid}`;
+  const { data, error, mutate, isLoading, isValidating } = useSWR<{
+    data: { data: Array<QueueEntryResult> };
+  }>(etlBaseUrl ? `${url}` : null, openmrsFetch);
+
+  let filteredQueueEntries = data?.data?.data;
+
+  if (patientUuid) {
+    filteredQueueEntries = filteredQueueEntries?.filter((queueEntry) => queueEntry.patient_uuid === patientUuid);
+  }
+
+  return {
+    queueEntries: filteredQueueEntries ?? [],
+    isLoading,
+    isError: error,
+    mutate,
     isValidating,
   };
 }
