@@ -15,6 +15,7 @@
       "name": "radiology-dashboard-link",
       "component": "radiologyDashboardLink",
       "slot": "homepage-dashboard-slot",
+      "privileges": ["O3 View Pharmacy Dashboard"],
       "meta": {
         "name": "radiology",
         "slot": "radiology-dashboard-slot",
@@ -26,7 +27,8 @@
     {
       "component": "root",
       "name": "radiology",
-      "slot": "radiology-dashboard-slot"
+      "slot": "radiology-dashboard-slot",
+      "privileges": ["O3 View Pharmacy Dashboard"]
     },
     {
       "name": "pickup-radiology-request-modal",
