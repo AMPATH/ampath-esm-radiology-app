@@ -31,6 +31,16 @@ export const configSchema = {
     _default: '2d4472e2-d7ab-4430-8e0e-a9ffcd809bf4',
     _description: 'Service Uuid for filtering queues',
   },
+  patientIdIdentifierTypeUuid: {
+    _type: Type.Array,
+    _default: [],
+    _description: 'Needed if the "id" column of "labTableColumns" is used. Is the OpenMRS ID by default.',
+  },
+  personAttributeTypeUuid: {
+    _type: Type.Array,
+    _default: ['72a759a8-1359-11df-a1f1-0026b9348838'],
+    _description: 'Needed for displaying person attributes',
+  },
 };
 
 export type Config = {
@@ -40,6 +50,8 @@ export type Config = {
   enableOdooBilling: boolean;
   blockedPaymentModes: Array<string>;
   serviceUuid: string;
+  personAttributeTypeUuid: Array<string>;
+  patientIdIdentifierTypeUuid: Array<string>;
 };
 
 export const StringPath =
