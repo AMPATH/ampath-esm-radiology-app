@@ -69,11 +69,17 @@ const tableColumnSpec = {
   //   headerLabelDefault: 'Action',
   //   key: 'action',
   // },
-  // patientId: {
-  //   headerLabelKey: 'patientId',
-  //   headerLabelDefault: 'Patient ID',
-  //   key: 'patientId',
-  // },
+  patientId: {
+    headerLabelKey: 'patientId',
+    headerLabelDefault: 'Patient ID',
+    key: 'patientId',
+  },
+  phoneNumber: {
+    // t('phoneNumber', 'Phone number')
+    headerLabelKey: 'phoneNumber',
+    headerLabelDefault: 'Phone number',
+    key: 'phoneNumber',
+  },
 };
 
 export interface OrdersDataTableProps {
@@ -83,6 +89,7 @@ export interface OrdersDataTableProps {
 const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
   const { t } = useTranslation();
   const [searchString, setSearchString] = useState('');
+  const { patientIdIdentifierTypeUuid, personAttributeTypeUuid } = useConfig<Config>();
 
   const { queueEntries } = useQueueEntries();
 
@@ -121,11 +128,17 @@ const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
         const priority = queueEntries?.find((q) => q.patient_uuid === patientUuid)?.priority ?? 'NON-URGENT';
 
         return {
-          patientId: patient?.identifiers?.find(
-            (identifier) =>
+          patientId: patient?.identifiers
+            ?.filter((identifier) =>
               identifier.preferred &&
-              !identifier.voided
-          )?.identifier,
+                !identifier.voided &&
+                patientIdIdentifierTypeUuid &&
+                patientIdIdentifierTypeUuid.length
+                ? patientIdIdentifierTypeUuid.includes(identifier.identifierType.uuid)
+                : true,
+            )
+            ?.map((identifier) => identifier.identifier)
+            ?.join(','),
           patientUuid: patientUuid,
           patientName: patient?.person?.display,
           patientAge: patient?.person?.age,
@@ -135,6 +148,14 @@ const OrdersDataTable: React.FC<OrdersDataTableProps> = (props) => {
           totalOrders: flattenedLabOrdersForPatient.length,
           orders: flattenedLabOrdersForPatient,
           originalOrders: labOrdersForPatient,
+          phoneNumber: patient?.person?.attributes
+            ?.filter((attribute) =>
+              personAttributeTypeUuid && personAttributeTypeUuid.length
+                ? personAttributeTypeUuid.includes(attribute.attributeType.uuid)
+                : true,
+            )
+            ?.map((attribute) => attribute.value)
+            ?.join(','),
         };
       });
     } else {
