@@ -65,7 +65,7 @@ export interface LineItem {
   item: string;
   priceUuid: string;
   priceName: string;
-  paymentStatus: string;
+  status: string;
 }
 export interface BillInvoice {
   uuid: string;
