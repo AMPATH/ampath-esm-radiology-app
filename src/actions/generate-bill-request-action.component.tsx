@@ -28,6 +28,7 @@ const GenerateBillRequestAction: React.FC<GenerateBillRequestActionMenuProps> = 
       order,
       quantity: 1,
       serviceTypeUuid: radiologyServiceTypedUuid,
+      servicePointName: "RADIOLOGY",
       mutated,
     });
   };
