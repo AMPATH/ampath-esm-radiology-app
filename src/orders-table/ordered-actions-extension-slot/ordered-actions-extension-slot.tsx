@@ -4,14 +4,17 @@ import React, { useEffect, useState } from 'react';
 import { useInvalidateBills, useInvalidateOrderBill, useOdooBills, useOrderBill } from '../../bill/bill.resource';
 import { type Config } from '../../config-schema';
 import { InlineLoading } from '@carbon/react';
+import { PreauthRequest } from '../../bill/bill.types';
 
 interface OrderedActionsExtensionSlotProps {
   order: Order;
   bills: BillInvoice[];
   isLoading: boolean;
+  preauthRequests: PreauthRequest[];
+  isLoadingPreauthRequests: boolean;
 }
 
-const OrderedActionsExtensionSlot: React.FC<OrderedActionsExtensionSlotProps> = ({ order, bills, isLoading }) => {
+const OrderedActionsExtensionSlot: React.FC<OrderedActionsExtensionSlotProps> = ({ order, bills, isLoading, preauthRequests, isLoadingPreauthRequests }) => {
   const [status, setStatus] = useState<BillStatus>('BLANK');
   const invalidateBills = useInvalidateBills(order?.patient?.uuid);
   const invalidateOrderBill = useInvalidateOrderBill(order?.orderNumber);
@@ -26,14 +29,36 @@ const OrderedActionsExtensionSlot: React.FC<OrderedActionsExtensionSlotProps> = 
 
   useEffect(() => {
     if (!enableOdooBilling) {
-      if (!isLoading && !isLoadingOrderBill && orderBill) {
+      if (!isLoading && !isLoadingOrderBill && !isLoadingPreauthRequests && orderBill && bills) {
         const billUuid = orderBill?.bill_uuid;
         const lineItemUuid = orderBill?.line_item_uuid;
         const bill = bills.find((b) => b.uuid === billUuid);
         const lineItem = bill?.lineItems?.find((i) => i.uuid === lineItemUuid);
         if (lineItem) {
           if (!blockedPaymentModes.includes(lineItem.priceName.toUpperCase())) {
-            setStatus('PAID');
+            if (!orderBill.consent_token) {
+              setStatus("AWAITING CLAIM VISIT");
+              return;
+            }
+            if (orderBill.requires_preauth) {
+              if (preauthRequests && preauthRequests.length) {
+                const intervention = preauthRequests.find(r => r.interventionCode === orderBill.intervention_code);
+                if (intervention) {
+                  if (intervention.status?.trim()?.toUpperCase() === "ACTIVE") {
+                    setStatus("PENDING PREAUTHORIZATION");
+                  }
+                  if (intervention.status?.trim()?.toUpperCase() === "FINALISED") {
+                    setStatus("PAID");
+                  }
+                } else {
+                  setStatus("NEEDS PREAUTHORIZATION");
+                }
+              } else {
+                setStatus("NEEDS PREAUTHORIZATION");
+              }
+            } else {
+              setStatus('PAID');
+            }
           } else {
             setStatus(lineItem?.status as BillStatus);
           }
@@ -53,7 +78,7 @@ const OrderedActionsExtensionSlot: React.FC<OrderedActionsExtensionSlotProps> = 
         }
       }
     }
-  }, [order, isLoading, bills, odooBills, orderBill, isLoadingOrderBill, blockedPaymentModes, enableOdooBilling]);
+  }, [order, isLoading, bills, odooBills, orderBill, isLoadingOrderBill, blockedPaymentModes, enableOdooBilling, preauthRequests, isLoadingPreauthRequests]);
 
   if (isLoadingOdooBills || isLoading || isLoadingOrderBill) {
     return <InlineLoading />;

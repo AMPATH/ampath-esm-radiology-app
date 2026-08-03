@@ -1,7 +1,8 @@
-import { openmrsFetch, restBaseUrl, useConfig } from '@openmrs/esm-framework';
+import { openmrsFetch, restBaseUrl, useConfig, useSession } from '@openmrs/esm-framework';
 import useSWR, { mutate } from 'swr';
 import { type BillInvoice } from '../types';
 import { useCallback } from 'react';
+import { OrderBillResponse, PreauthPreviewResponse } from './bill.types';
 
 export const useBills = (patientUuid: string = '', billStatus: string = 'PENDING') => {
   const url = `${restBaseUrl}/billing/bill?patientUuid=${patientUuid}&v=custom:(uuid,patient:(uuid),lineItems:(uuid,billableService,quantity,price,item,priceUuid,priceName,status),status)`;
@@ -49,7 +50,7 @@ export const useOrderBill = (orderNumber: string) => {
     isLoading,
     isValidating,
     mutate: mutated,
-  } = useSWR<{ data: { bill_uuid: string; line_item_uuid: string } }>(url, openmrsFetch);
+  } = useSWR<{ data: OrderBillResponse }>(url, openmrsFetch);
 
   const results = data?.data;
 
@@ -92,5 +93,33 @@ export const useOdooBills = (patientUuid: string, enableOdooBilling: boolean = f
     odooBills: results,
     error,
     isLoadingOdooBills: isLoading,
+  };
+};
+
+export const usePreauthPreview = (consentToken: string) => {
+  const { sessionLocation } = useSession();
+  const { hieBaseUrl } = useConfig({
+    externalModuleName: '@ampath/esm-dha-workflow-app',
+  });
+  const url = consentToken ? `${hieBaseUrl}/pre-auth/preview?locationUuid=${sessionLocation?.uuid}&consentToken=${consentToken}` : null;
+
+  const {
+    data,
+    error,
+    isLoading,
+    isValidating,
+    mutate: mutated,
+  } = useSWR<{ data: PreauthPreviewResponse }>(url, openmrsFetch, {
+    errorRetryCount: 2,
+  });
+
+  const results = data?.data?.results ?? [];
+
+  return {
+    preauthRequests: results,
+    error,
+    isLoading,
+    isValidating,
+    mutated,
   };
 };

@@ -55,7 +55,7 @@ export type CodedProvider = {
   display: string;
 };
 
-export type BillStatus = 'BLANK' | 'PENDING' | 'PAID' | 'POSTED';
+export type BillStatus = 'BLANK' | 'PENDING' | 'PAID' | 'POSTED' | 'PENDING PREAUTHORIZATION' | 'NEEDS PREAUTHORIZATION' | 'AWAITING CLAIM VISIT';
 
 export interface LineItem {
   uuid: string;
